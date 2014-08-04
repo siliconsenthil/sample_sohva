@@ -29,19 +29,19 @@ trait   CouchDBConnectionBase {
       }
     }
 
-    override val serializer: JsonSerializer = new JsonSerializer(version, List()) {
-      def ignoreFields: PartialFunction[(String, Any), Option[(String, Any)]] = {
-        case (name, value) =>
-          if (name.contains("$") || name.equals("id")) None else Some(name, value)
-      }
-
-      override implicit val formats: Formats = {
-        existingFormats +
-          FieldSerializer[CouchBaseModel](ignoreFields) +
-          FieldSerializer[CouchNestedModel](ignoreFields) +
-          DateTimeSerializer
-      }
-    }
+//    override val serializer: JsonSerializer = new JsonSerializer(version, List()) {
+//      def ignoreFields: PartialFunction[(String, Any), Option[(String, Any)]] = {
+//        case (name, value) =>
+//          if (name.contains("$") || name.equals("id")) None else Some(name, value)
+//      }
+//
+//      override implicit val formats: Formats = {
+//        existingFormats +
+//          FieldSerializer[CouchBaseModel](ignoreFields) +
+//          FieldSerializer[CouchNestedModel](ignoreFields) +
+//          DateTimeSerializer
+//      }
+//    }
   }
 
   lazy val session = client.startCookieSession.tap(_.login(username, password))
